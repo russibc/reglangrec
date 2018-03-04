@@ -6,7 +6,12 @@
 package furb;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
+import java.util.List;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -53,10 +58,7 @@ public class Main extends javax.swing.JFrame {
 
         tbOutput.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "linha", "resultado", "sequência", "reconhecimento"
@@ -84,6 +86,11 @@ public class Main extends javax.swing.JFrame {
 
         btnAnalyze.setText("analisar");
         btnAnalyze.setActionCommand("analyze");
+        btnAnalyze.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnalyzeActionPerformed(evt);
+            }
+        });
 
         btnClean.setText("limpar");
         btnClean.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +129,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(scrollInput, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAnalyze, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTeam, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnClean, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -141,10 +148,31 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTeamActionPerformed
 
     private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanActionPerformed
-        taInput.setText(null);        
+        taInput.setText(null);
         DefaultTableModel model = (DefaultTableModel) tbOutput.getModel();
         model.setRowCount(0);
     }//GEN-LAST:event_btnCleanActionPerformed
+
+    private void btnAnalyzeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalyzeActionPerformed
+
+        String input = taInput.getText();
+        if (input.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nenhuma palavra foi inserida no editor de palavras!");
+        } else {
+
+            if (input.contains("\t") || input.contains("\n")) {
+                JOptionPane.showMessageDialog(null, "Palavra possui tabulação e/ou quebra de linha!");
+            } else {
+                FiniteAutomaton fA = new FiniteAutomaton();
+                WordRecognition result = fA.wordChecker(input);
+
+                DefaultTableModel model = (DefaultTableModel) tbOutput.getModel();
+                model.addRow(new String[]{String.valueOf(result.getLine()), result.getResult().getDescription(), result.getSequence(), result.getRecognition()});
+
+            }
+        }
+
+    }//GEN-LAST:event_btnAnalyzeActionPerformed
 
     /**
      * @param args the command line arguments
