@@ -26,7 +26,7 @@ public class FiniteAutomaton {
     final static char S1 = ';';
     final static char S2 = ',';
     final static char S3 = '=';
-
+    
     public WordRecognition wordChecker(String word) {
 
         // get letters  
@@ -40,16 +40,17 @@ public class FiniteAutomaton {
             // its an invalid word, therefore it does not belong to the language
             w.setResult(OutputType.ERROR_INVALID_SYMBOL);
         } else {
-
+            
             int index = 0;
             byte state = Q0;  // initial state
             StringBuilder sb = new StringBuilder(); // sequence
+            boolean ok = true;
 
             // do this for all the symbols of the word
             while (index < symbols.length) {
-
+                
                 sb.append("q0,"); // {q0}
-                while ((state == Q0) && (index < symbols.length)) {
+                while ((state == Q0) && (index < symbols.length) && (ok == true)) {
                     switch (symbols[index]) {
                         case A:
                             state = Q1Q5;
@@ -62,23 +63,25 @@ public class FiniteAutomaton {
                             break;
                         default:
                             w.setResult(OutputType.ERROR_INVALID_WORD);
+                            ok = false;
                             break;
                     }
                     index++;
                 }
-
+                
                 sb.append("q1q5,");  // {q1q5}
-                while ((state == Q1Q5) && (index < symbols.length)) {
+                while ((state == Q1Q5) && (index < symbols.length) && (ok == true)) {
                     if (symbols[index] == A) {
                         state = Q2Q6;
                     } else {
                         w.setResult(OutputType.ERROR_INVALID_WORD);
+                        ok = false;
                     }
                     index++;
                 }
-
+                
                 sb.append("q3q7,"); // {q3q7}
-                while ((state == Q3Q7) && (index < symbols.length)) {
+                while ((state == Q3Q7) && (index < symbols.length && (ok == true))) {
                     switch (symbols[index]) {
                         case A:
                             state = Q5;
@@ -91,13 +94,14 @@ public class FiniteAutomaton {
                             break;
                         default:
                             w.setResult(OutputType.ERROR_INVALID_WORD);
+                            ok = false;
                             break;
                     }
                     index++;
                 }
-
+                
                 sb.append("q4q8,"); // {q4q8}
-                while ((state == Q4Q8) && (index < symbols.length)) {
+                while ((state == Q4Q8) && (index < symbols.length) && (ok == true)) {
                     switch (symbols[index]) {
                         case A:
                             state = Q5;
@@ -110,13 +114,14 @@ public class FiniteAutomaton {
                             break;
                         default:
                             w.setResult(OutputType.ERROR_INVALID_WORD);
+                            ok = false;
                             break;
                     }
                     index++;
                 }
-
+                
                 sb.append("q2q6,"); // {q2q6}
-                while ((state == Q2Q6) && (index < symbols.length)) {
+                while ((state == Q2Q6) && (index < symbols.length) && (ok == true)) {
                     switch (symbols[index]) {
                         case A:
                             state = Q1Q5;
@@ -129,13 +134,14 @@ public class FiniteAutomaton {
                             break;
                         default:
                             w.setResult(OutputType.ERROR_INVALID_WORD);
+                            ok = false;
                             break;
                     }
                     index++;
                 }
-
+                
                 sb.append("q5,");  // {q5}
-                while ((state == Q5) && (index < symbols.length)) {
+                while ((state == Q5) && (index < symbols.length) && (ok == true)) {
                     switch (symbols[index]) {
                         case A:
                             state = Q6;
@@ -146,9 +152,9 @@ public class FiniteAutomaton {
                     }
                     index++;
                 }
-
+                
                 sb.append("q7,"); // {q7}
-                while ((state == Q7) && (index < symbols.length)) {
+                while ((state == Q7) && (index < symbols.length) && (ok == true)) {
                     switch (symbols[index]) {
                         case A:
                             state = Q5;
@@ -161,26 +167,28 @@ public class FiniteAutomaton {
                             break;
                         default:
                             w.setResult(OutputType.ERROR_INVALID_WORD);
+                            ok = false;
                             break;
                     }
                     index++;
                 }
-
+                
                 sb.append("q6,"); // {q6}
-                while ((state == Q6) && (index < symbols.length)) {
+                while ((state == Q6) && (index < symbols.length) && (ok == true)) {
                     switch (symbols[index]) {
                         case A:
                             state = Q5;
                             break;
                         default:
                             w.setResult(OutputType.ERROR_INVALID_WORD);
+                            ok = false;
                             break;
                     }
                     index++;
                 }
-
+                
                 sb.append("q8,"); // {q8}
-                while ((state == Q8) && (index < symbols.length)) {
+                while ((state == Q8) && (index < symbols.length) && (ok == true)) {
                     switch (symbols[index]) {
                         case A:
                             state = Q5;
@@ -190,13 +198,14 @@ public class FiniteAutomaton {
                             break;
                         default:
                             w.setResult(OutputType.ERROR_INVALID_WORD);
+                            ok = false;
                             break;
                     }
                     index++;
                 }
-
+                
                 sb.append("q4,"); // {q4}
-                while ((state == Q4) && (index < symbols.length)) {
+                while ((state == Q4) && (index < symbols.length) && (ok == true)) {
                     switch (symbols[index]) {
                         case A:
                             state = Q5;
@@ -209,13 +218,14 @@ public class FiniteAutomaton {
                             break;
                         default:
                             w.setResult(OutputType.ERROR_INVALID_WORD);
+                            ok = false;
                             break;
                     }
                     index++;
                 }
-
-                sb.append("q3,"); // {q3}
-                while ((state == Q3) && (index < symbols.length)) {
+                
+                sb.append("q3"); // {q3}
+                while ((state == Q3) && (index < symbols.length) && (ok == true)) {
                     switch (symbols[index]) {
                         case A:
                             state = Q5;
@@ -225,22 +235,30 @@ public class FiniteAutomaton {
                             break;
                         default:
                             w.setResult(OutputType.ERROR_INVALID_WORD);
+                            ok = false;
                             break;
                     }
                     index++;
                 }
+                
+                if(index < symbols.length) {
+                    sb.append(",");
+                }
             }
+            
+            w.setRecognition(sb.toString());
 
             /* The while loop ended. It means that all the symbols of the word 
            were read so, if the current state is a final state, the word is accepted.
              */
             if ((state == Q1Q5) || (state == Q5)) {
                 w.setResult(OutputType.VALID_WORD);
+                return w;
             }
-
-//        throw new RuntimeException(OutputType.ERROR_INVALID_WORD.getDescription());
+            
+            w.setResult(OutputType.ERROR_INVALID_WORD);
         }
-
+        
         return w;
     }
 

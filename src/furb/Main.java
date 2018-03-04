@@ -79,6 +79,8 @@ public class Main extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbOutput.setCellSelectionEnabled(true);
+        tbOutput.setEnabled(false);
         tbOutput.setMaximumSize(new java.awt.Dimension(864, 173));
         tbOutput.setMinimumSize(new java.awt.Dimension(864, 173));
         tbOutput.setPreferredSize(new java.awt.Dimension(864, 173));
