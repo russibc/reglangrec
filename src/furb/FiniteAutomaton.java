@@ -1,5 +1,6 @@
 package furb;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,21 +23,50 @@ public class FiniteAutomaton {
     final static char A = 'a';
     final static char B = 'b';
     final static char C = 'c';
-
+    
     /**
      * Breaks word input into array of words
      *
      * @param input
      * @return
      */
-    private String[] getArrayOfWords(String input) {
-        String[] wordArray = input.split("\\s+");
-
-        SpecialSymbol s = SpecialSymbol.checkSymbol(input);
-
+    private ArrayList<ArrayList<String>> getArrayOfWords(String input) {
+        
+        // creates an array of arrays (like a matrix).
+        // Each array inside it represents a line of the input.
+        ArrayList<ArrayList<String>> wordArray = new ArrayList<>();
+        
+        // creates the first arraylist of the matrix (the first line)
+        wordArray.add(new ArrayList<>());
+        
+        // breaks input into array of char
+        char[] chars = input.toCharArray();
+        
+        // the lines of the arraylist matrix 
+        int index = 0;
+        
+        String word = "";
+        for (int i = 0; i < chars.length; i++) {                    // run through all the chars of the input
+            if ((chars[i] != ' ') && (chars[i] != '\n')) {          // if the char isn't a white space or new line
+                word += chars[i];                                   // append it to the word 
+            } else if (word != "") {                                // otherwise, if the word is not empty,
+                wordArray.get(index).add(word);                     // add it to the current arraylist (line)
+                word = "";                                          // and reset the word variable
+            }
+            if ((i+1 < chars.length) && (chars[i+1] == '\n')) {     // if the next char is a new line
+                if (word != "")                                     // check again if the word is not empty, if it's not,
+                    wordArray.get(index).add(word);                 // add it to the current arraylist (line)
+                wordArray.add(new ArrayList<>());                   // then creates a new arraylist (new line),
+                index++;                                            // moves to this new arraylist (new line) 
+                word = "";                                          // and reset the word variable again
+            }
+        }
+        if(word != "")                                              // the last word can't be added inside the for loop
+            wordArray.get(index).add(word);                         // so, if it is not empty, add it
+        
         return wordArray;
     }
-
+    
     /**
      *
      * @param input
@@ -46,11 +76,18 @@ public class FiniteAutomaton {
 
         // create object list to store recognition output result
         List<WordRecognition> resultList = new LinkedList<>();
-        for (String string : getArrayOfWords(input)) {
-            String wordStr = string.trim();
-            if (!wordStr.isEmpty()) {
-                WordRecognition word = this.recognition(wordStr);
-                resultList.add(word);
+        
+        // creates the matrix of lines and words
+        ArrayList<ArrayList<String>> array = getArrayOfWords(input);
+        
+        for (int i = 0; i < array.size(); i++) {    // first run through the arraylists 
+            for (String string : array.get(i)) {    // and then through its elements
+                String wordStr = string.trim();
+                if (!wordStr.isEmpty()) {
+                    WordRecognition word = this.recognition(wordStr);
+                    word.setLine(i+1);          // the line will be the current arraylist index + 1
+                    resultList.add(word);
+                }
             }
         }
 
@@ -84,7 +121,7 @@ public class FiniteAutomaton {
                 StringBuilder sb = new StringBuilder(); // sequence
                 boolean ok = true;
 
-                // do this for all the symbols of the word
+                // does this for all the symbols of the word
                 while (index < symbols.length) {
 
                     sb.append("q0,"); // {q0}
@@ -305,37 +342,5 @@ public class FiniteAutomaton {
         }
 
         return w;
-    }
-
-    public static void main(String[] args) {
-        // words starting with a
-//        System.out.println("01: " + wordChecker("a"));
-//        System.out.println("02: " + wordChecker("aaa"));
-//        System.out.println("03: " + wordChecker("aaba"));
-//        System.out.println("04: " + wordChecker("aabaaa"));
-//        System.out.println("05: " + wordChecker("aabbcba"));
-//        System.out.println("06: " + wordChecker("aaca"));
-//        System.out.println("07: " + wordChecker("aaccbca"));
-//        System.out.println("08: " + wordChecker("aacbaaa"));
-
-        // words starting with b
-//        System.out.println("09: " + wordChecker("bbca"));
-//        System.out.println("10: " + wordChecker("ba"));
-//        System.out.println("11: " + wordChecker("bccbcaaa"));
-        // words starting with c
-//        System.out.println("12: " + wordChecker("cccbca"));
-//        System.out.println("13: " + wordChecker("ca"));
-//        System.out.println("14: " + wordChecker("cbbcbaaa"));
-        // errors
-        //recognizer("aa");
-        //recognizer("b");
-        //recognizer("c");
-        //recognizer("bbc");;
-        //recognizer("cbac");
-        //recognizer("ab");
-        //recognizer("ac");
-        //recognizer("x");
-        //recognizer("y");
-        //recognizer("z");
     }
 }
