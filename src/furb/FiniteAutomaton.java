@@ -241,6 +241,10 @@ public class FiniteAutomaton {
                     index++;
                 }
                 
+                if(ok == false) {
+                    break;
+                }
+                
                 if(index < symbols.length) {
                     sb.append(",");
                 }
