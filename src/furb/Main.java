@@ -72,12 +72,12 @@ public class Main extends javax.swing.JFrame {
             }
         });
         tbOutput.setCellSelectionEnabled(true);
-        tbOutput.setEnabled(false);
         tbOutput.setMaximumSize(new java.awt.Dimension(864, 173));
         tbOutput.setMinimumSize(new java.awt.Dimension(864, 173));
         tbOutput.setPreferredSize(new java.awt.Dimension(864, 173));
         scrollOutput.setViewportView(tbOutput);
 
+        btnAnalyze.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/analise.png"))); // NOI18N
         btnAnalyze.setText("analisar");
         btnAnalyze.setActionCommand("analyze");
         btnAnalyze.addActionListener(new java.awt.event.ActionListener() {
@@ -86,6 +86,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        btnClean.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/limpar.png"))); // NOI18N
         btnClean.setText("limpar");
         btnClean.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +94,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        btnTeam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/equipe.png"))); // NOI18N
         btnTeam.setText("equipe");
         btnTeam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

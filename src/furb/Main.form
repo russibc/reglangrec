@@ -133,7 +133,6 @@
                 </Column>
               </TableColumnModel>
             </Property>
-            <Property name="enabled" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[864, 173]"/>
             </Property>
@@ -152,6 +151,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnAnalyze">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/analise.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="analisar"/>
         <Property name="actionCommand" type="java.lang.String" value="analyze"/>
       </Properties>
@@ -161,6 +163,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnClean">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/limpar.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="limpar"/>
       </Properties>
       <Events>
@@ -169,6 +174,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnTeam">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/equipe.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="equipe"/>
       </Properties>
       <Events>
