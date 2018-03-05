@@ -143,10 +143,13 @@ public class Main extends javax.swing.JFrame {
         main.setVisible(true);
     }//GEN-LAST:event_btnTeamActionPerformed
 
-    private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanActionPerformed
-        taInput.setText(null);
+    private void cleanGUI() {
         DefaultTableModel model = (DefaultTableModel) tbOutput.getModel();
         model.setRowCount(0);
+    }
+    private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanActionPerformed
+        taInput.setText(null);
+        cleanGUI();
     }//GEN-LAST:event_btnCleanActionPerformed
 
     private void btnAnalyzeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalyzeActionPerformed
@@ -156,6 +159,7 @@ public class Main extends javax.swing.JFrame {
         } else {
             List<WordRecognition> resultList = new FiniteAutomaton().wordChecker(input);
             if (resultList != null) {
+                cleanGUI();
                 DefaultTableModel model = (DefaultTableModel) tbOutput.getModel();
 
                 resultList.forEach((result) -> {
