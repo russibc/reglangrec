@@ -378,7 +378,6 @@ public class FiniteAutomaton {
                 w.setResult(OutputType.VALID_WORD);
             }
 
-            w.setResult(OutputType.ERROR_INVALID_WORD);
         }
 
         w.setRecognition(sb.toString());

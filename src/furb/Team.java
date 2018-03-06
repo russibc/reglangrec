@@ -100,12 +100,10 @@ public class Team extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                JFrame main = new Team();
-                main.setLocationRelativeTo(null);
-                main.setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            JFrame main = new Team();
+            main.setLocationRelativeTo(null);
+            main.setVisible(true);
         });
     }
 

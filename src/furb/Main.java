@@ -197,12 +197,10 @@ public class Main extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                JFrame main = new Main();
-                main.setLocationRelativeTo(null);
-                main.setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            JFrame main = new Main();
+            main.setLocationRelativeTo(null);
+            main.setVisible(true);
         });
     }
 
