@@ -53,7 +53,7 @@ public class FiniteAutomaton {
                 wordArray.get(index).add(word);                     // add it to the current arraylist (line)
                 word = "";                                          // and reset the word variable
             }
-            if ((i + 1 < chars.length) && (chars[i + 1] == '\n')) { // if the next char is a new line
+            if (chars[i] == '\n') { // if the next char is a new line
                 if (!word.isEmpty()) {                              // check again if the word is not empty, if it's not,
                     wordArray.get(index).add(word);                 // add it to the current arraylist (line)
                 }
