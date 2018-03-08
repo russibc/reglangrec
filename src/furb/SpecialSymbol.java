@@ -6,30 +6,27 @@ package furb;
  */
 public enum SpecialSymbol {
 
-    COMMA(","), SEMICOLON(";"), EQUALS("=");
+    COMMA(','), SEMICOLON(';'), EQUALS('=');
 
-    private final String description;
+    private final char description;
 
-    SpecialSymbol(String description) {
+    SpecialSymbol (char description) {
         this.description = description;
     }
 
-    public String getDescription() {
+    public char getDescription () {
         return description;
     }
     
-    public static boolean containsSymbol(String str) {
+    public static boolean containsSymbol (char str) {
         return (checkSymbol(str) != null);
     }
 
-    public static SpecialSymbol checkSymbol(String str) {
-        
+    public static SpecialSymbol checkSymbol (char str) {
         for (SpecialSymbol s : SpecialSymbol.values()) {
-            if (str.equalsIgnoreCase(s.getDescription())) {
+            if (str == s.getDescription())
                 return s;
-            }
         }
-
         return null;
     }
 

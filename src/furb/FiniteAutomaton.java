@@ -7,22 +7,23 @@ import java.util.List;
 public class FiniteAutomaton {
 
     // states
-    final static byte Q0 = 0;       // initial state
-    final static byte Q1Q5 = 1;     // final state
-    final static byte Q3Q7 = 2;
-    final static byte Q4Q8 = 3;
-    final static byte Q2Q6 = 4;
-    final static byte Q5 = 5;       // final state
-    final static byte Q7 = 6;
-    final static byte Q6 = 7;
-    final static byte Q8 = 8;
-    final static byte Q4 = 9;
-    final static byte Q3 = 10;
+    private final static String Q0 = "q0";                                              // initial state
+    private  static String Q1Q5 = "q1q5";                                          // final state
+    private final static String Q3Q7 = "q3q7";
+    private final static String Q4Q8 = "q4q8";
+    private final static String Q2Q6 = "q2q6";
+    private final static String Q5 = "q5";                                              // final state
+    private final static String Q7 = "q7";
+    private final static String Q6 = "q6";
+    private final static String Q8 = "q8";
+    private final static String Q4 = "q4";
+    private final static String Q3 = "q3";
+    private final static String QERRO = "qErro";
 
     // symbols
-    final static char A = 'a';
-    final static char B = 'b';
-    final static char C = 'c';
+    private final static char A = 'a';
+    private final static char B = 'b';
+    private final static char C = 'c';
 
     /**
      * Breaks word input into array of words
@@ -31,7 +32,7 @@ public class FiniteAutomaton {
      * @return
      */
     private ArrayList<ArrayList<String>> getArrayOfWords(String input) {
-
+        
         // creates an array of arrays (like a matrix).
         // Each array inside it represents a line of the input.
         ArrayList<ArrayList<String>> wordArray = new ArrayList<>();
@@ -47,7 +48,7 @@ public class FiniteAutomaton {
 
         String word = "";
         for (int i = 0; i < chars.length; i++) {                                // run through all the chars of the input
-            if ((chars[i] == ',') || (chars[i] == ';') || (chars[i] == '=')) {  // if the current char is a special symbol
+            if (SpecialSymbol.containsSymbol(chars[i])) {                       // if the current char is a special symbol
                 if (!word.isEmpty())                                            // check if the word is not empty, if it's not,
                     wordArray.get(index).add(word);                             // add it to the current arraylist (line)
                 word = "" + chars[i];                                           // reset the word variable and add the special symbol found
@@ -69,10 +70,9 @@ public class FiniteAutomaton {
                 }
             }
         }
-        if (!word.isEmpty()) {                                                  // the last word can't be added inside the for loop
+        if (!word.isEmpty())                                                    // the last word can't be added inside the for loop
             wordArray.get(index).add(word);                                     // so, if it is not empty, add it
-        }
-
+        
         return wordArray;
     }
 
@@ -89,9 +89,10 @@ public class FiniteAutomaton {
         // creates the matrix of lines and words
         ArrayList<ArrayList<String>> array = getArrayOfWords(input);
 
+        String wordStr;
         for (int i = 0; i < array.size(); i++) {                                // first run through the arraylists 
             for (String string : array.get(i)) {                                // and then through its elements
-                String wordStr = string.trim();
+                wordStr = string.trim();
                 if (!wordStr.isEmpty()) {
                     WordRecognition word = this.recognition(wordStr);
                     word.setLine(i + 1);                                        // the line will be the current arraylist index + 1
@@ -99,7 +100,6 @@ public class FiniteAutomaton {
                 }
             }
         }
-
         return resultList;
     }
 
@@ -115,280 +115,259 @@ public class FiniteAutomaton {
         // get letters  
         char[] symbols = word.toCharArray();
 
-        StringBuilder sb = new StringBuilder(); // sequence
+        StringBuilder sb = new StringBuilder();                                 // sequence
 
         int index = 0;
-        byte state = Q0;  // initial state
-        boolean ok = true;
+        String state = Q0;                                                      // initial state
+        boolean repeat = true;
         while (index < symbols.length) {
-
-            // check if its a special symbol
-            if (SpecialSymbol.containsSymbol(word)) {
-                w.setResult(OutputType.SPECIAL_SYMBOL);
-                sb.append("q0,");
-                sb.append("qErro");
-                break;
-            }
-
-            // check if the word starts with any other symbol
-            if ((symbols[0] != A) && (symbols[0] != B) && (symbols[0] != C)) {
-                w.setResult(OutputType.ERROR_INVALID_SYMBOL);
-                sb.append("q0,");
-                sb.append("qErro");
-                break;
-            }
-
             // {q0}
-            while ((state == Q0) && (index < symbols.length) && (ok == true)) {
+            if ((state.equals(Q0)) && (index < symbols.length)) {
+                sb.append(state).append(", ");
                 switch (symbols[index]) {
                     case A:
-                        sb.append("q0,");
                         state = Q1Q5;
                         break;
                     case B:
-                        sb.append("q0,");
                         state = Q3Q7;
                         break;
                     case C:
-                        sb.append("q0,");
                         state = Q4Q8;
                         break;
                     default:
-                        sb.append("qErro");
-                        w.setResult(OutputType.ERROR_INVALID_WORD);
-                        ok = false;
+                        if (SpecialSymbol.containsSymbol(symbols[index])) {
+                            state = Q5;
+                        } else {
+                            state = QERRO;
+                            sb.append(state);
+                            w.setResult(OutputType.ERROR_INVALID_WORD);
+                            repeat = false;
+                        }
                         break;
                 }
                 index++;
             }
 
             // {q1q5}
-            while ((state == Q1Q5) && (index < symbols.length) && (ok == true)) {
+            if ((state.equals(Q1Q5)) && (index < symbols.length)) {
+                sb.append(state).append(", ");
                 if (symbols[index] == A) {
-                    sb.append("q1q5,");
                     state = Q2Q6;
                 } else {
-                    sb.append("qErro");
+                    state = QERRO;
+                    sb.append(state);
                     w.setResult(OutputType.ERROR_INVALID_WORD);
-                    ok = false;
+                    repeat = false;
+                    break;
                 }
                 index++;
             }
 
             // {q3q7}
-            while ((state == Q3Q7) && (index < symbols.length && (ok == true))) {
+            if ((state.equals(Q3Q7)) && (index < symbols.length)) {
+                sb.append(state).append(", ");
                 switch (symbols[index]) {
                     case A:
-                        sb.append("q3q7,");
                         state = Q5;
                         break;
                     case B:
-                        sb.append("q3q7,");
                         state = Q7;
                         break;
                     case C:
-                        sb.append("q3q7,");
                         state = Q4Q8;
                         break;
                     default:
-                        sb.append("qErro");
+                        state = QERRO;
+                        sb.append(state);
                         w.setResult(OutputType.ERROR_INVALID_WORD);
-                        ok = false;
+                        repeat = false;
                         break;
                 }
                 index++;
             }
 
             // {q4q8}
-            while ((state == Q4Q8) && (index < symbols.length) && (ok == true)) {
+            if ((state.equals(Q4Q8)) && (index < symbols.length)) {
+                sb.append(state).append(", ");
                 switch (symbols[index]) {
                     case A:
-                        sb.append("q4q8,");
                         state = Q5;
                         break;
                     case B:
-                        sb.append("q4q8,");
                         state = Q3Q7;
                         break;
                     case C:
-                        sb.append("q4q8,");
                         state = Q4;
                         break;
                     default:
-                        sb.append("qErro");
+                        state = QERRO;
+                        sb.append(state);
                         w.setResult(OutputType.ERROR_INVALID_WORD);
-                        ok = false;
+                        repeat = false;
                         break;
                 }
                 index++;
             }
 
             // {q2q6}
-            while ((state == Q2Q6) && (index < symbols.length) && (ok == true)) {
+            if ((state.equals(Q2Q6)) && (index < symbols.length)) {
+                sb.append(state).append(", ");
                 switch (symbols[index]) {
                     case A:
-                        sb.append("q2q6,");
                         state = Q1Q5;
                         break;
                     case B:
-                        sb.append("q2q6,");
                         state = Q3Q7;
                         break;
                     case C:
-                        sb.append("q2q6,");
                         state = Q4Q8;
                         break;
                     default:
-                        sb.append("qErro");
+                        state = QERRO;
+                        sb.append(state);
                         w.setResult(OutputType.ERROR_INVALID_WORD);
-                        ok = false;
+                        repeat = false;
                         break;
                 }
                 index++;
             }
 
             // {q5}
-            while ((state == Q5) && (index < symbols.length) && (ok == true)) {
+            if ((state.equals(Q5)) && (index < symbols.length)) {
+                sb.append(state).append(", ");
                 switch (symbols[index]) {
                     case A:
-                        sb.append("q5,");
                         state = Q6;
                         break;
                     default:
-                        sb.append("qErro");
+                        state = QERRO;
+                        sb.append(state);
                         w.setResult(OutputType.ERROR_INVALID_WORD);
-                        ok = false;
+                        repeat = false;
                         break;
                 }
                 index++;
             }
 
             // {q7}
-            while ((state == Q7) && (index < symbols.length) && (ok == true)) {
+            while ((state.equals(Q7)) && (index < symbols.length)) {
+                sb.append(state).append(", ");
                 switch (symbols[index]) {
                     case A:
-                        sb.append("q7,");
                         state = Q5;
                         break;
                     case B:
-                        sb.append("q7,");
                         state = Q7;
                         break;
                     case C:
-                        sb.append("q7,");
                         state = Q8;
                         break;
                     default:
-                        sb.append("qErro");
+                        state = QERRO;
+                        sb.append(state);
                         w.setResult(OutputType.ERROR_INVALID_WORD);
-                        ok = false;
+                        repeat = false;
                         break;
                 }
                 index++;
             }
 
             // {q6}
-            while ((state == Q6) && (index < symbols.length) && (ok == true)) {
+            if ((state.equals(Q6)) && (index < symbols.length)) {
+                sb.append(state).append(", ");
                 switch (symbols[index]) {
                     case A:
-                        sb.append("q6,");
                         state = Q5;
                         break;
                     default:
-                        sb.append("qErro");
+                        state = QERRO;
+                        sb.append(state);
                         w.setResult(OutputType.ERROR_INVALID_WORD);
-                        ok = false;
+                        repeat = false;
                         break;
                 }
                 index++;
             }
 
             // {q8}
-            while ((state == Q8) && (index < symbols.length) && (ok == true)) {
+            if ((state.equals(Q8)) && (index < symbols.length)) {
+                sb.append(state).append(", ");
                 switch (symbols[index]) {
                     case A:
-                        sb.append("q8,");
                         state = Q5;
                         break;
                     case B:
-                        sb.append("q8,");
                         state = Q7;
                         break;
                     default:
-                        sb.append("qErro");
+                        state = QERRO;
+                        sb.append(state);
                         w.setResult(OutputType.ERROR_INVALID_WORD);
-                        ok = false;
+                        repeat = false;
                         break;
                 }
                 index++;
             }
 
             // {q4}
-            while ((state == Q4) && (index < symbols.length) && (ok == true)) {
+            while ((state.equals(Q4)) && (index < symbols.length)) {
+                sb.append(state).append(", ");
                 switch (symbols[index]) {
                     case A:
-                        sb.append("q4,");
                         state = Q5;
                         break;
                     case B:
-                        sb.append("q4,");
                         state = Q3;
                         break;
                     case C:
-                        sb.append("q4,");
                         state = Q4;
                         break;
                     default:
-                        sb.append("qErro");
+                        state = QERRO;
+                        sb.append(state);
                         w.setResult(OutputType.ERROR_INVALID_WORD);
-                        ok = false;
+                        repeat = false;
                         break;
                 }
                 index++;
             }
 
             // {q3}
-            while ((state == Q3) && (index < symbols.length) && (ok == true)) {
+            while ((state.equals(Q3)) && (index < symbols.length)) {
+                sb.append(state).append(", ");
                 switch (symbols[index]) {
                     case A:
-                        sb.append("q3,");
                         state = Q5;
                         break;
                     case C:
-                        sb.append("q3,");
                         state = Q3;
                         break;
                     default:
-                        sb.append("qErro");
+                        state = QERRO;
+                        sb.append(state);
                         w.setResult(OutputType.ERROR_INVALID_WORD);
-                        ok = false;
+                        repeat = false;
                         break;
                 }
                 index++;
             }
-
-            if (ok == false) {
+            
+            if (!repeat)
                 break;
-            }
 
-            if (index == symbols.length) {
-                sb.append("q");
+            if (index == symbols.length)
                 sb.append(state);
-            }
 
             /**
              * The while loop ended. It means that all the symbols of the input
              * were read so, if the current state is a final state, the input is
              * accepted.
              */
-            if ((state == Q1Q5) || (state == Q5)) {
+            if ((state.equals(Q1Q5)) || (state.equals(Q5)))
                 w.setResult(OutputType.VALID_WORD);
-            }
-
+            
         }
-
         w.setRecognition(sb.toString());
-
         return w;
     }
 }
