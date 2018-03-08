@@ -7,12 +7,12 @@ import java.util.List;
 public class FiniteAutomaton {
 
     // states
-    private final static String Q0 = "q0";                                              // initial state
-    private  static String Q1Q5 = "q1q5";                                          // final state
+    private final static String Q0 = "q0";                                      // initial state
+    private final static String Q1Q5 = "q1q5";                                  // final state
     private final static String Q3Q7 = "q3q7";
     private final static String Q4Q8 = "q4q8";
     private final static String Q2Q6 = "q2q6";
-    private final static String Q5 = "q5";                                              // final state
+    private final static String Q5 = "q5";                                      // final state
     private final static String Q7 = "q7";
     private final static String Q6 = "q6";
     private final static String Q8 = "q8";
@@ -120,7 +120,7 @@ public class FiniteAutomaton {
         int index = 0;
         String state = Q0;                                                      // initial state
         boolean repeat = true;
-        while (index < symbols.length) {
+        while ((index < symbols.length) && repeat) {
             // {q0}
             if ((state.equals(Q0)) && (index < symbols.length)) {
                 sb.append(state).append(", ");
@@ -351,9 +351,6 @@ public class FiniteAutomaton {
                 }
                 index++;
             }
-            
-            if (!repeat)
-                break;
 
             if (index == symbols.length)
                 sb.append(state);
