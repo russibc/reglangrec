@@ -32,7 +32,7 @@ public class FiniteAutomaton {
      * @return
      */
     private ArrayList<ArrayList<String>> getArrayOfWords(String input) {
-
+        
         // creates an array of arrays (like a matrix).
         // Each array inside it represents a line of the input.
         ArrayList<ArrayList<String>> wordArray = new ArrayList<>();
@@ -49,14 +49,12 @@ public class FiniteAutomaton {
         String word = "";
         for (int i = 0; i < chars.length; i++) {                                // run through all the chars of the input
             if (SpecialSymbol.containsSymbol(chars[i])) {                       // if the current char is a special symbol
-                if (!word.isEmpty()) // check if the word is not empty, if it's not,
-                {
+                if (!word.isEmpty())                                            // check if the word is not empty, if it's not,
                     wordArray.get(index).add(word);                             // add it to the current arraylist (line)
-                }
                 word = "" + chars[i];                                           // reset the word variable and add the special symbol found
                 wordArray.get(index).add(word);                                 // and add it to the array
                 word = "";                                                      // then reset the word variable again
-            } else {
+            } else {                                                            
                 if ((chars[i] != ' ') && (chars[i] != '\n')) {                  // if the char isn't a white space or new line
                     word += chars[i];                                           // append it to the word 
                 } else if (!word.isEmpty()) {                                   // otherwise, if the word is not empty,
@@ -64,20 +62,17 @@ public class FiniteAutomaton {
                     word = "";                                                  // and reset the word variable
                 }
                 if (chars[i] == '\n') {                                         // if the current char is a new line
-                    if (!word.isEmpty()) // check again if the word is not empty, if it's not,
-                    {
+                    if (!word.isEmpty())                                        // check again if the word is not empty, if it's not,
                         wordArray.get(index).add(word);                         // add it to the current arraylist (line)
-                    }
                     wordArray.add(new ArrayList<>());                           // then creates a new arraylist (new line),
                     index++;                                                    // moves to this new arraylist (new line) 
                     word = "";                                                  // and reset the word variable again
                 }
             }
         }
-        if (!word.isEmpty()) // the last word can't be added inside the for loop
-        {
+        if (!word.isEmpty())                                                    // the last word can't be added inside the for loop
             wordArray.get(index).add(word);                                     // so, if it is not empty, add it
-        }
+        
         return wordArray;
     }
 
@@ -124,8 +119,8 @@ public class FiniteAutomaton {
 
         int index = 0;
         String state = Q0;                                                      // initial state
-        boolean repeat = true;
-        while ((index < symbols.length) && repeat) {
+        boolean specialSymbol = false;
+        while (!state.equals(QERRO) && (index < symbols.length)) {
             // {q0}
             if ((state.equals(Q0)) && (index < symbols.length)) {
                 sb.append(state).append(", ");
@@ -141,13 +136,10 @@ public class FiniteAutomaton {
                         break;
                     default:
                         if (SpecialSymbol.containsSymbol(symbols[index])) {
+                            specialSymbol = true;
                             state = Q5;
-                        } else {
+                        } else
                             state = QERRO;
-                            sb.append(state);
-                            w.setResult(OutputType.ERROR_INVALID_WORD);
-                            repeat = false;
-                        }
                         break;
                 }
                 index++;
@@ -156,15 +148,10 @@ public class FiniteAutomaton {
             // {q1q5}
             if ((state.equals(Q1Q5)) && (index < symbols.length)) {
                 sb.append(state).append(", ");
-                if (symbols[index] == A) {
+                if (symbols[index] == A)
                     state = Q2Q6;
-                } else {
+                else
                     state = QERRO;
-                    sb.append(state);
-                    w.setResult(OutputType.ERROR_INVALID_WORD);
-                    repeat = false;
-                    break;
-                }
                 index++;
             }
 
@@ -183,9 +170,6 @@ public class FiniteAutomaton {
                         break;
                     default:
                         state = QERRO;
-                        sb.append(state);
-                        w.setResult(OutputType.ERROR_INVALID_WORD);
-                        repeat = false;
                         break;
                 }
                 index++;
@@ -206,9 +190,6 @@ public class FiniteAutomaton {
                         break;
                     default:
                         state = QERRO;
-                        sb.append(state);
-                        w.setResult(OutputType.ERROR_INVALID_WORD);
-                        repeat = false;
                         break;
                 }
                 index++;
@@ -229,9 +210,6 @@ public class FiniteAutomaton {
                         break;
                     default:
                         state = QERRO;
-                        sb.append(state);
-                        w.setResult(OutputType.ERROR_INVALID_WORD);
-                        repeat = false;
                         break;
                 }
                 index++;
@@ -245,10 +223,8 @@ public class FiniteAutomaton {
                         state = Q6;
                         break;
                     default:
-                        state = QERRO;
-                        sb.append(state);
-                        w.setResult(OutputType.ERROR_INVALID_WORD);
-                        repeat = false;
+                        if (!specialSymbol)
+                            state = QERRO;
                         break;
                 }
                 index++;
@@ -269,9 +245,6 @@ public class FiniteAutomaton {
                         break;
                     default:
                         state = QERRO;
-                        sb.append(state);
-                        w.setResult(OutputType.ERROR_INVALID_WORD);
-                        repeat = false;
                         break;
                 }
                 index++;
@@ -286,9 +259,6 @@ public class FiniteAutomaton {
                         break;
                     default:
                         state = QERRO;
-                        sb.append(state);
-                        w.setResult(OutputType.ERROR_INVALID_WORD);
-                        repeat = false;
                         break;
                 }
                 index++;
@@ -306,9 +276,6 @@ public class FiniteAutomaton {
                         break;
                     default:
                         state = QERRO;
-                        sb.append(state);
-                        w.setResult(OutputType.ERROR_INVALID_WORD);
-                        repeat = false;
                         break;
                 }
                 index++;
@@ -329,9 +296,6 @@ public class FiniteAutomaton {
                         break;
                     default:
                         state = QERRO;
-                        sb.append(state);
-                        w.setResult(OutputType.ERROR_INVALID_WORD);
-                        repeat = false;
                         break;
                 }
                 index++;
@@ -349,33 +313,26 @@ public class FiniteAutomaton {
                         break;
                     default:
                         state = QERRO;
-                        sb.append(state);
-                        w.setResult(OutputType.ERROR_INVALID_WORD);
-                        repeat = false;
                         break;
                 }
                 index++;
             }
-
-            if (index == symbols.length) {
-                sb.append(state);
-            }
-
-            /**
-             * The while loop ended. It means that all the symbols of the input
-             * were read so, if the current state is a final state, the input is
-             * accepted.
-             */
-            if ((state.equals(Q1Q5)) || (state.equals(Q5))) {
-                w.setResult(OutputType.VALID_WORD);
-            } else {
-                w.setResult(OutputType.ERROR_INVALID_WORD);
-            }
-
         }
+        if ((state.equals(Q1Q5)) || (state.equals(Q5))) {
+            if (!specialSymbol)
+                w.setResult(OutputType.VALID_WORD);
+            else
+                w.setResult(OutputType.SPECIAL_SYMBOL);
+        } else {
+            if (index == 1)
+                w.setResult(OutputType.ERROR_INVALID_SYMBOL);
+            else
+                w.setResult(OutputType.ERROR_INVALID_WORD);
+            state = QERRO;
+        }
+        sb.append(state);
         
         w.setRecognition(sb.toString());
-        
         return w;
     }
 }
