@@ -313,7 +313,7 @@ public class FiniteAutomaton {
                         state = Q5;
                         break;
                     case C:
-                        state = Q3;
+                        state = Q4;
                         break;
                     default:
                         state = QERRO;

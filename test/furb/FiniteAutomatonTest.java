@@ -81,7 +81,7 @@ public class FiniteAutomatonTest {
 
         assertEquals("aabccbca", resultList.get(2).getSequence());
         assertEquals(OutputType.VALID_WORD, resultList.get(2).getResult());
-        assertEquals("q0, q1q5, q2q6, q3q7, q4q8, q4, q5", resultList.get(2).getRecognition());
+        assertEquals("q0, q1q5, q2q6, q3q7, q4q8, q4, q3, q4, q5", resultList.get(2).getRecognition());
 
         assertEquals(";", resultList.get(3).getSequence());
         assertEquals(OutputType.SPECIAL_SYMBOL, resultList.get(3).getResult());
@@ -99,7 +99,8 @@ public class FiniteAutomatonTest {
 
         assertEquals("aabccbca", resultList.get(1).getSequence());
         assertEquals(OutputType.VALID_WORD, resultList.get(1).getResult());
-        assertEquals("q0, q1q5, q2q6, q3q7, q4q8, q4, q5", resultList.get(1).getRecognition());
+        System.out.println(resultList.get(1).getRecognition());
+        assertEquals("q0, q1q5, q2q6, q3q7, q4q8, q4, q3, q4, q5", resultList.get(1).getRecognition());
 
     }
 
