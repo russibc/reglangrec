@@ -24,15 +24,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="scrollTeam" pref="320" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
-              <Component id="btnClose" min="-2" max="-2" attributes="0"/>
+              <Component id="scrollTeam" min="-2" pref="261" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnClose" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -41,9 +41,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="scrollTeam" min="-2" pref="130" max="-2" attributes="0"/>
-              <EmptySpace pref="12" max="32767" attributes="0"/>
-              <Component id="btnClose" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnClose" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -59,7 +59,7 @@
         <Component class="javax.swing.JTextPane" name="tpTeam">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="text" type="java.lang.String" value="ALEX SER&#xd3;DIO GON&#xc7;ALVES e BRUNA CAROLINE RUSSI  "/>
+            <Property name="text" type="java.lang.String" value="EQUIPE: &#xa;1. ALEX SER&#xd3;DIO GON&#xc7;ALVES&#xa;2. BRUNA CAROLINE RUSSI  &#xa;&#xa;CURSO: CI&#xca;NCIA DA COMPUTA&#xc7;&#xc3;O&#xa;DISCIPLINA: LINGUAGENS FORMAIS&#xa;SEMESTRE: 2018.1"/>
           </Properties>
         </Component>
       </SubComponents>

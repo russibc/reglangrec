@@ -32,7 +32,7 @@ public class Team extends javax.swing.JFrame {
         setResizable(false);
 
         tpTeam.setEditable(false);
-        tpTeam.setText("ALEX SERÓDIO GONÇALVES e BRUNA CAROLINE RUSSI  ");
+        tpTeam.setText("EQUIPE: \n1. ALEX SERÓDIO GONÇALVES\n2. BRUNA CAROLINE RUSSI  \n\nCURSO: CIÊNCIA DA COMPUTAÇÃO\nDISCIPLINA: LINGUAGENS FORMAIS\nSEMESTRE: 2018.1");
         scrollTeam.setViewportView(tpTeam);
 
         btnClose.setText("Fechar");
@@ -48,21 +48,21 @@ public class Team extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrollTeam, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(129, 129, 129)
-                .addComponent(btnClose)
+                .addComponent(scrollTeam, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnClose)
+                .addGap(104, 104, 104))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(scrollTeam, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnClose)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

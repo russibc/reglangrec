@@ -1,7 +1,7 @@
 package furb;
 
 import java.util.List;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class FiniteAutomatonTest {
