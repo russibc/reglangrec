@@ -49,21 +49,25 @@ public class FiniteAutomaton {
         String word = "";
         for (int i = 0; i < chars.length; i++) {                                // run through all the chars of the input
             if (SpecialSymbol.containsSymbol(chars[i])) {                       // if the current char is a special symbol
-                if (!word.isEmpty())                                            // check if the word is not empty, if it's not,
-                    wordArray.get(index).add(word);                             // add it to the current arraylist (line)
+                if (!word.isEmpty()) {                                          // check if the word is not empty, if it's not,
+                    wordArray.get(index).add(word);     
+                } 
+                // add it to the current arraylist (line)
                 word = "" + chars[i];                                           // reset the word variable and add the special symbol found
                 wordArray.get(index).add(word);                                 // and add it to the array
                 word = "";                                                      // then reset the word variable again
             } else {                                                            
-                if ((chars[i] != ' ') && (chars[i] != '\n')) {                  // if the char isn't a white space or new line
+                if ((chars[i] != ' ') && (chars[i] != '\n') && (chars[i] != '\t')) {                  // if the char isn't a white space or new line
                     word += chars[i];                                           // append it to the word 
                 } else if (!word.isEmpty()) {                                   // otherwise, if the word is not empty,
                     wordArray.get(index).add(word);                             // add it to the current arraylist (line)
                     word = "";                                                  // and reset the word variable
                 }
                 if (chars[i] == '\n') {                                         // if the current char is a new line
-                    if (!word.isEmpty())                                        // check again if the word is not empty, if it's not,
-                        wordArray.get(index).add(word);                         // add it to the current arraylist (line)
+                    if (!word.isEmpty()) {                                       // check again if the word is not empty, if it's not,
+                        wordArray.get(index).add(word);    
+                    }
+                    // add it to the current arraylist (line)
                     wordArray.add(new ArrayList<>());                           // then creates a new arraylist (new line),
                     index++;                                                    // moves to this new arraylist (new line) 
                     word = "";                                                  // and reset the word variable again
