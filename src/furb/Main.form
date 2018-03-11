@@ -88,6 +88,10 @@
               <Dimension value="[864, 187]"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextArea()"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="taInput.setBorder(new NumberedBorder());"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

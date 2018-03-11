@@ -41,6 +41,7 @@ public class Main extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(865, 410));
         setResizable(false);
 
+        taInput.setBorder(new NumberedBorder());
         taInput.setColumns(20);
         taInput.setRows(5);
         taInput.setMaximumSize(new java.awt.Dimension(864, 187));
