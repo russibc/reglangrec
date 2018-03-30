@@ -34,8 +34,8 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="scrollInput" max="32767" attributes="0"/>
-                  <Component id="scrollOutput" pref="771" max="32767" attributes="0"/>
+                  <Component id="scrollInput" pref="0" max="32767" attributes="0"/>
+                  <Component id="scrollOutput" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="btnAnalyze" min="-2" pref="250" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -50,8 +50,8 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="scrollInput" min="-2" pref="213" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -61,7 +61,7 @@
               </Group>
               <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
               <Component id="scrollOutput" pref="173" max="32767" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -76,18 +76,20 @@
       <SubComponents>
         <Component class="javax.swing.JTextArea" name="taInput">
           <Properties>
-            <Property name="columns" type="int" value="20"/>
-            <Property name="rows" type="int" value="5"/>
+            <Property name="columns" type="int" value="73"/>
+            <Property name="rows" type="int" value="14"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[864, 187]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[864, 187]"/>
             </Property>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[864, 187]"/>
-            </Property>
           </Properties>
+          <AccessibilityProperties>
+            <Property name="AccessibleContext.accessibleParent" type="javax.accessibility.Accessible" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="default"/>
+            </Property>
+          </AccessibilityProperties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextArea()"/>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="taInput.setBorder(new NumberedBorder());"/>

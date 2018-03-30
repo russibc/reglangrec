@@ -3,6 +3,7 @@ package furb;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -42,11 +43,10 @@ public class Main extends javax.swing.JFrame {
         setResizable(false);
 
         taInput.setBorder(new NumberedBorder());
-        taInput.setColumns(20);
-        taInput.setRows(5);
+        taInput.setColumns(73);
+        taInput.setRows(14);
         taInput.setMaximumSize(new java.awt.Dimension(864, 187));
         taInput.setMinimumSize(new java.awt.Dimension(864, 187));
-        taInput.setPreferredSize(new java.awt.Dimension(864, 187));
         scrollInput.setViewportView(taInput);
 
         tbOutput.setModel(new javax.swing.table.DefaultTableModel(
@@ -110,8 +110,8 @@ public class Main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollInput)
-                    .addComponent(scrollOutput, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
+                    .addComponent(scrollInput, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(scrollOutput)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAnalyze, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
