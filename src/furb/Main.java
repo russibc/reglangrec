@@ -47,7 +47,7 @@ public class Main extends javax.swing.JFrame {
         taInput.setRows(14);
         taInput.setMaximumSize(new java.awt.Dimension(864, 187));
         taInput.setMinimumSize(new java.awt.Dimension(864, 187));
-        taInput.setPreferredSize(new java.awt.Dimension(864, 187));
+        taInput.setPreferredSize(null);
         scrollInput.setViewportView(taInput);
 
         tbOutput.setModel(new javax.swing.table.DefaultTableModel(
