@@ -1,9 +1,5 @@
 package furb;
 
-/**
- *
- * @author Bruna
- */
 public class WordRecognition {
 
     private int line;

@@ -1,9 +1,5 @@
 package furb;
 
-/**
- *
- * @author Bruna
- */
 public enum SpecialSymbol {
 
     COMMA(','), SEMICOLON(';'), EQUALS('=');

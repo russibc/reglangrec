@@ -87,7 +87,7 @@ public class FiniteAutomatonTest {
         assertEquals(OutputType.SPECIAL_SYMBOL, resultList.get(3).getResult());
         assertEquals("q0, q5", resultList.get(3).getRecognition());
     }
-    
+
     @Test
     public void testValid04() {
         String word = "bbcaaa\taabccbca";
@@ -102,6 +102,19 @@ public class FiniteAutomatonTest {
         System.out.println(resultList.get(1).getRecognition());
         assertEquals("q0, q1q5, q2q6, q3q7, q4q8, q4, q3, q4, q5", resultList.get(1).getRecognition());
 
+    }
+
+    @Test
+    public void testMain() {
+        String word = "bbcaaa	aabccbca;\n"
+                + "\n"
+                + "              bbcca	ba%ba\n"
+                + "    =\n"
+                + "         teste...abc\n"
+                + "          aaaabcbcba";
+
+        List<WordRecognition> resultList = new FiniteAutomaton().wordChecker(word);
+        assertEquals("q0, q1q5, q2q6, q1q5, q2q6, q3q7, q4q8, q3q7, q4q8, q3q7, q5", resultList.get(resultList.size() - 1).getRecognition());
     }
 
 }

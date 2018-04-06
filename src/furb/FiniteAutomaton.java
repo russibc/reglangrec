@@ -340,8 +340,10 @@ public class FiniteAutomaton {
             } else {
                 w.setResult(OutputType.ERROR_INVALID_WORD);
             }
-            sb.append(state).append(", ");
-            state = QERRO;
+            if (!state.equals(QERRO)) {
+                sb.append(state).append(", ");
+                state = QERRO;
+            }
         }
 
         sb.append(state);

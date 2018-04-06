@@ -3,7 +3,6 @@ package furb;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -39,6 +38,7 @@ public class Main extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("reconhecedor de linguagem regular");
         setMaximumSize(new java.awt.Dimension(865, 410));
+        setMinimumSize(new java.awt.Dimension(865, 410));
         setPreferredSize(new java.awt.Dimension(865, 410));
         setResizable(false);
 
@@ -47,6 +47,7 @@ public class Main extends javax.swing.JFrame {
         taInput.setRows(14);
         taInput.setMaximumSize(new java.awt.Dimension(864, 187));
         taInput.setMinimumSize(new java.awt.Dimension(864, 187));
+        taInput.setPreferredSize(new java.awt.Dimension(864, 187));
         scrollInput.setViewportView(taInput);
 
         tbOutput.setModel(new javax.swing.table.DefaultTableModel(
